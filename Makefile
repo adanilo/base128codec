@@ -1,0 +1,38 @@
+LN=ln
+INSTDIR=../../bin
+DECODER=d64
+ENCODER=e64
+
+DECODER128=d128
+ENCODER128=e128
+
+DECODER192=d192
+ENCODER192=e192
+
+all: $(ENCODER) $(ENCODER128) $(ENCODER192)
+
+install: all
+	-$(LN) -f $(DECODER) $(INSTDIR)/$(DECODER)
+	-$(LN) -f $(ENCODER) $(INSTDIR)/$(ENCODER)
+	-$(LN) -f $(DECODER128) $(INSTDIR)/$(DECODER128)
+	-$(LN) -f $(ENCODER128) $(INSTDIR)/$(ENCODER128)
+	-$(LN) -f $(DECODER192) $(INSTDIR)/$(DECODER192)
+	-$(LN) -f $(ENCODER192) $(INSTDIR)/$(ENCODER192)
+
+$(DECODER): b64.c
+	$(CC) -o $@ $<
+
+$(ENCODER): $(DECODER)
+	-$(LN) -f $< $@
+
+$(DECODER128): b128.c
+	$(CC) -o $@ $<
+
+$(ENCODER128): $(DECODER128)
+	-$(LN) -f $< $@
+
+$(DECODER192): $(DECODER128)
+	-$(LN) -f $< $@
+
+$(ENCODER192): $(DECODER192)
+	-$(LN) -f $< $@
