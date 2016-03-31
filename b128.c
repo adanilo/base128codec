@@ -1,5 +1,19 @@
 /**
- *	Base 128/192 encoding experiment by Alex Danilo <adanilo@google.com>
+ *  Copyright 2013-2016 Alex Danilo
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ *
+ *	Base 128/192 encoding experiment.
  *
  *	Ths is just a quick experiment to see what sort of speed we get by encoding
  *	a contiguous 128 value range in bytes that replaces base 64 with it's low level
@@ -7,8 +21,9 @@
  *
  *	Ultimately, the encoding I'd like to use is a 192 value encoding which yields
  *	7.5 bits/byte - i.e. approx. 6.66% loss encoding binary data in a text-safe
- *	transfer form. This 128 value coding is just to test the basis of the
- *	speed and compressibility of the result.
+ *	transfer form. The 128 value coding is just to test the basis of the
+ *	speed and compressibility of the result and is easy to use in JS. The 192
+ *  value encoding is more efficient but likely a lot trickier to use from JS.
  *
  *	NB: This is using ISO-9959-1 as it's basis. The source code will break if you
  *	try to view as UTF-8.
